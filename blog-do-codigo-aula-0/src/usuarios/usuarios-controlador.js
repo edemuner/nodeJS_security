@@ -27,6 +27,11 @@ module.exports = {
     }
   },
 
+  login: (req, res) => {
+      res.status(204).send()
+      res.status(401).json({erro:erro})
+  },
+
   lista: async (req, res) => {
     const usuarios = await Usuario.lista();
     res.json(usuarios);
