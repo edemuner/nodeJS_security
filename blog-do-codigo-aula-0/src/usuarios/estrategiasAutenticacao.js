@@ -1,14 +1,13 @@
 const passport = require('passport')
 const LocalStrategy = require('passport-local').Strategy
 const Usuario = require('./usuarios-modelo')
-const { invalidArgumentError } = require('../erros')
 const bcrypt = require('bcrypt')
 const { InvalidArgumentError } = require('../erros')
 
 
 function verificaUsuario(usuario){
     if (!usuario){
-        throw new invalidArgumentError('Não existe usuário com esse e-mail')
+        throw new InvalidArgumentError('Não existe usuário com esse e-mail')
     }
 }
 
