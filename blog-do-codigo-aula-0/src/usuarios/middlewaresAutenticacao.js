@@ -35,7 +35,7 @@ module.exports = {
                     return res.status(500).json({erro:erro.message})
                 }
                 if (!usuario){
-                    return res.status(401).json()
+                    return res.status(401).json({msg:'Usuário não encontrado'})
                 }
 
                 req.token = info.token
