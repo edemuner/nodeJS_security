@@ -20,7 +20,7 @@ module.exports = {
         nome,
         email
       });
-
+      // tratado separadamente para ser transformado em hash antes de ser guardado
       await usuario.adicionaSenha(senha)
 
       await usuario.adiciona();
@@ -38,6 +38,7 @@ module.exports = {
   },
 
   login: (req, res) => {
+    // token gerado e incluído na resposta
     const token = criaTokenJWT(req.user)
     res.set('Authorization', token)
     res.status(204).send()
@@ -48,6 +49,9 @@ module.exports = {
     try{
       // before being invoked here, req.token was setted inside the bearer strategy, it's not the pure content of the original request
       const token =  req.token
+      // in case of logout before the token is expired, the token is sent to the blacklist
+      // and stays there until expired
+      // using a token requires it not to be expired nor in blacklist
       await blacklist.adiciona(token)
       res.status(204).send()
     }catch(erro){

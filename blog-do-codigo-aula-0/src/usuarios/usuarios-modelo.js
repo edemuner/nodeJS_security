@@ -31,7 +31,6 @@ class Usuario {
   valida() {
     validacoes.campoStringNaoNulo(this.nome, 'nome');
     validacoes.campoStringNaoNulo(this.email, 'email');
-
   }
 
   
