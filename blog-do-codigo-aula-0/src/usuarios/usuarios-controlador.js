@@ -1,7 +1,7 @@
 const Usuario = require('./usuarios-modelo');
 const { InvalidArgumentError, InternalServerError } = require('../erros');
 const jwt = require('jsonwebtoken')
-const blacklist = require('../../redis/manipulaBlacklist')
+const blocklist = require('../../redis/blocklist-access-token')
 const crypto = require('crypto')
 const moment = require('moment')
 const allowlistRefreshToken = require('../../redis/allowlist-refresh-token')
@@ -65,10 +65,10 @@ module.exports = {
     try{
       // before being invoked here, req.token was setted inside the bearer strategy, it's not the pure content of the original request
       const token =  req.token
-      // in case of logout before the token is expired, the token is sent to the blacklist
+      // in case of logout before the token is expired, the token is sent to the blocklist
       // and stays there until expired
-      // using a token requires it not to be expired nor in blacklist
-      await blacklist.adiciona(token)
+      // using a token requires it not to be expired nor in blocklist
+      await blocklist.adiciona(token)
       res.status(204).send()
     }catch(erro){
       res.status(500).json({erro: erro.message})
