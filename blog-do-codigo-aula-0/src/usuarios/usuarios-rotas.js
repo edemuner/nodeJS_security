@@ -4,12 +4,17 @@ const middlewaresAutenticacao = require('./middlewaresAutenticacao')
 module.exports = app => {
 
   app
+    .route('/usuario/atualiza_token')
+    // usuariosControlador.login já faz o trabalho de gerar os 2 tokens
+    .post(middlewaresAutenticacao.refresh, usuariosControlador.login)
+
+  app
     .route('/usuario/login')
     .post(middlewaresAutenticacao.local, usuariosControlador.login)
 
   app
     .route('/usuario/logout')
-    .get(middlewaresAutenticacao.bearer, usuariosControlador.logout)
+    .post([middlewaresAutenticacao.bearer, middlewaresAutenticacao.refresh], usuariosControlador.logout)
     
   app
     .route('/usuario')
