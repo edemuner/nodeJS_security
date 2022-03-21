@@ -1,6 +1,5 @@
 const Usuario = require('./usuarios-modelo');
 const { InvalidArgumentError, InternalServerError } = require('../erros');
-const blocklist = require('../../redis/blocklist-access-token')
 const tokens = require('./tokens')
 
 
@@ -51,7 +50,7 @@ module.exports = {
       // in case of logout before the token is expired, the token is sent to the blocklist
       // and stays there until expired
       // using a token requires it not to be expired nor in blocklist
-      await blocklist.adiciona(token)
+      await tokens.access.invalida(token)
       res.status(204).send()
     }catch(erro){
       res.status(500).json({erro: erro.message})

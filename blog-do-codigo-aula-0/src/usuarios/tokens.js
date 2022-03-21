@@ -45,6 +45,13 @@ async function verificaTokenNablocklist(token, nome, blocklist){
     }
 }
 
+function invalidaTokenJWT(token, blocklist){
+    return blocklist.adiciona(token)
+}
+
+async function invalidaTokenOpaco(token, allowlist){
+    await allowlist.deleta(token)
+}
 async function verificaTokenJWT(token, nome, blocklist){
     await verificaTokenNablocklist(token, nome, blocklist)
     const {id} = jwt.verify(token, process.env.CHAVE_JWT)
@@ -61,6 +68,9 @@ module.exports = {
         },
         verifica(token){
             return verificaTokenJWT(token, this.nome,  this.lista)
+        },
+        invalida(token){
+            return invalidaTokenJWT(token, this.lista)
         }
     },
 
@@ -76,5 +86,8 @@ module.exports = {
         verifica(token){
             return verificaTokenOpaco(token, this.nome, this.lista)
         },
+        invalida(token){
+            return invalidaTokenOpaco(token, this.lista)
+        }
     }
 }
