@@ -16,7 +16,8 @@ module.exports = {
     try {
       const usuario = new Usuario({
         nome,
-        email
+        email,
+        emailVerificado: false
       });
       // tratado separadamente para ser transformado em hash antes de ser guardado
       await usuario.adicionaSenha(senha)
