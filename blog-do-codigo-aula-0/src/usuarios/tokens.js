@@ -8,15 +8,15 @@ const {InvalidArgumentError} = require('../erros')
 
 function criaTokenJWT(id, [tempoQuantidade, tempoUnidade]){
     const payload = { id }
-    const token = jwt.sign(payload, process.env.CHAVE_JWT, { expiresIn:tempoQuantidade + tempoUnidade}) 
+    const token = jwt.sign(payload, process.env.CHAVE_JWT, { expiresIn:tempoQuantidade + tempoUnidade}) // str concat with time and timeunit
     return token
-  }
+}
   
 async function criaTokenOpaco(id, [tempoQuantidade, tempoUnidade], allowlist){
-const tokenOpaco = crypto.randomBytes(24).toString('hex')
-const dataExpiracao = moment().add(tempoQuantidade, tempoUnidade).unix()
-await allowlist.adiciona(tokenOpaco, id, dataExpiracao)
-return tokenOpaco
+    const tokenOpaco = crypto.randomBytes(24).toString('hex')
+    const dataExpiracao = moment().add(tempoQuantidade, tempoUnidade).unix()
+    await allowlist.adiciona(tokenOpaco, id, dataExpiracao)
+    return tokenOpaco
 }
 
 async function verificaTokenOpaco(token, nome, allowlist){
@@ -52,6 +52,7 @@ function invalidaTokenJWT(token, blocklist){
 async function invalidaTokenOpaco(token, allowlist){
     await allowlist.deleta(token)
 }
+
 async function verificaTokenJWT(token, nome, blocklist){
     await verificaTokenNablocklist(token, nome, blocklist)
     const {id} = jwt.verify(token, process.env.CHAVE_JWT)
@@ -59,6 +60,7 @@ async function verificaTokenJWT(token, nome, blocklist){
 }
 
 module.exports = {
+
     access: {
         nome: 'access token',
         lista: blocklistAccessToken, 
@@ -73,8 +75,6 @@ module.exports = {
             return invalidaTokenJWT(token, this.lista)
         }
     },
-
-    
 
     refresh: {
         nome: 'refresh token',

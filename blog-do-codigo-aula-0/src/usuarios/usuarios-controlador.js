@@ -1,11 +1,13 @@
 const Usuario = require('./usuarios-modelo');
 const { InvalidArgumentError, InternalServerError } = require('../erros');
 const tokens = require('./tokens')
+const emails = require('./emails')
 
 
 module.exports = {
   adiciona: async (req, res) => {
     const { nome, email, senha } = req.body;
+    console.log(req.body)
 
     try {
       const usuario = new Usuario({
@@ -16,6 +18,8 @@ module.exports = {
       await usuario.adicionaSenha(senha)
 
       await usuario.adiciona();
+
+      emails.enviaEmail(usuario).catch(console.log)
 
       res.status(201).json();
     } catch (erro) {
