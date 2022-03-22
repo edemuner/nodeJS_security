@@ -76,7 +76,7 @@ module.exports = {
 
   verificaEmail: async (req, res) => {
     try {
-      const usuario = await Usuario.buscaPorId(req.params.id)
+      const usuario = req.user
       await usuario.verificaEmail()
       res.status(200).json()
     } catch(erro){
