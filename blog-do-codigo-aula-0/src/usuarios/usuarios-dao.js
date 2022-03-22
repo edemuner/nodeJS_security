@@ -81,6 +81,17 @@ module.exports = {
     });
   },
 
+  modificaEmailVerificado: (usuario, emailVerificado) => {
+    return new Promise((resolve, reject) => {
+      db.run(`UPDATE usuarios SET emailVerificado = ? WHERE id = ?`, 
+      [emailVerificado, usuario.id],
+      erro => {
+        if (erro) reject(new InternalServerError('Erro ao acessar a base de dados'))
+        return resolve()
+      })
+    })
+  },
+
   deleta: usuario => {
     return new Promise((resolve, reject) => {
       db.run(
