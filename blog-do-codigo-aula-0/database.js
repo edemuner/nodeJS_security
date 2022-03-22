@@ -28,7 +28,7 @@ db.serialize(() => {
 //     console.log('Usuarios: ');
 //     console.log(usuario);
 //   });
-// });
+});
 
 process.on('SIGINT', () =>
   db.close(() => {
