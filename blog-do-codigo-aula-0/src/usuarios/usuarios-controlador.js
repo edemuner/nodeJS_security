@@ -1,7 +1,7 @@
 const Usuario = require('./usuarios-modelo');
 const { InvalidArgumentError, InternalServerError } = require('../erros');
 const tokens = require('./tokens')
-const emails = require('./emails')
+const {EmailVerificacao} = require('./emails')
 
 
 module.exports = {
@@ -19,7 +19,10 @@ module.exports = {
 
       await usuario.adiciona();
 
-      emails.enviaEmail(usuario).catch(console.log)
+      const endereco =  'localhost:3000/usuario/verifica_email/' + usuario.id
+      const emailVerificacao = new EmailVerificacao(usuario, endereco)
+
+      emailVerificacao.enviaEmail().catch(console.log)
 
       res.status(201).json();
     } catch (erro) {
