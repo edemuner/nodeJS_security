@@ -22,7 +22,7 @@ class EmailVerificacao extends Email {
         this.to = usuario.email
         this.subject = 'Verificação de E-mail'
         this.html = `Olá! Verifique seu e-mail aqui: ${endereco}`
-        this.text = `<h1>Olá!</h1> <a href=${endereco}>Verifique seu e-mail aqui: ${endereco}</a>`
+        this.text = `<h1>Olá!</h1> <a href="${endereco}">Verifique seu e-mail aqui: ${endereco}</a>`
     }
 }
 
