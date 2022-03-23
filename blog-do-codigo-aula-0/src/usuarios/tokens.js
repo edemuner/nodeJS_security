@@ -39,6 +39,7 @@ function verificaTokenEnviado(token, nome) {
 }
 
 async function verificaTokenNablocklist(token, nome, blocklist){
+    if (!blocklist) return
     const tokenNablocklist = await blocklist.contemToken(token)
     if (tokenNablocklist){
         throw new jwt.JsonWebTokenError(`${nome} inválido por logout`)
@@ -88,6 +89,17 @@ module.exports = {
         },
         invalida(token){
             return invalidaTokenOpaco(token, this.lista)
+        }
+    },
+
+    verificacaoEmail: {
+        nome:'token de verificação de e-mail',
+        expiracao: [1, 'h'],
+        cria(id){
+            return criaTokenJWT(id, this.expiracao)
+        },
+        verifica(token){
+            return verificaTokenJWT(token, this.nome)
         }
     }
 }
