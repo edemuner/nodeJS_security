@@ -26,5 +26,16 @@ module.exports = {
     } catch (erro) {
       return res.status(500).json({ erro: erro });
     }
+  },
+
+  obterDetalhes: (req, res) => {
+    console.log('ainda sob implementação')
+    res.status(200).end()
+  },
+
+  remover: (req, res) => {
+    console.log('ainda sob implementação')
+    res.status(200).end()
   }
+
 };
