@@ -6,9 +6,9 @@ module.exports = app => {
   app
     .route('/post')
     .get(postsControlador.lista)
-    .post(middlewaresAutenticacao.bearer, postsControlador.adiciona);
+    .post([middlewaresAutenticacao.bearer, autorizacao(['admin', 'editor'])], postsControlador.adiciona);
 
   app.route('/post/:id')
-    .get(middlewaresAutenticacao.bearer, postsControlador.obterDetalhes)
+    .get([middlewaresAutenticacao.bearer, autorizacao(['admin', 'editor', 'assinante'])], postsControlador.obterDetalhes)
     .delete([middlewaresAutenticacao.bearer, autorizacao(['admin', 'editor'])], postsControlador.remover)
 };
