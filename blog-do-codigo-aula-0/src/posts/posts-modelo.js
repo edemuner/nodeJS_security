@@ -23,6 +23,11 @@ class Post {
   static lista() {
     return postsDao.lista();
   }
+
+  static verPost(id){
+    const post = postsDao.verUm(id)
+    return post
+  }
 }
 
 module.exports = Post;

@@ -28,9 +28,15 @@ module.exports = {
     }
   },
 
-  obterDetalhes: (req, res) => {
-    console.log('ainda sob implementação')
-    res.status(200).end()
+  obterDetalhes: async (req, res) => {
+    try{
+      const id = req.params.id
+      const post = await Post.verPost(id)
+      console.log(post)
+      res.status(200).json({post:post})
+    } catch(erro){
+      res.status(500).json({erro:erro.message})
+    }
   },
 
   remover: (req, res) => {
