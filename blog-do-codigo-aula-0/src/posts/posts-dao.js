@@ -37,7 +37,8 @@ module.exports = {
 
   verUm: id => {
     return new Promise((resolve, reject) => {
-      db.run(`SELECT * FROM posts WHERE id = ?`, [id], (erro, resultados) => {
+      console.log(id)
+      db.get(`SELECT * FROM posts WHERE id = ?`, id, (erro, resultados) => {
         if (erro) {
           return reject('Erro na consulta à base de dados')
         }
