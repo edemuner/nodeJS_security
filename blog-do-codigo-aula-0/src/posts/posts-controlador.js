@@ -38,9 +38,14 @@ module.exports = {
     }
   },
 
-  remover: (req, res) => {
-    console.log('ainda sob implementação')
-    res.status(200).end()
+  remover: async (req, res) => {
+    try{
+      const id = req.params.id
+      await Post.remover(id)
+      res.status(200).end()
+    } catch(erro){
+      res.status(500).json({erro:erro.message})
+    }
   }
 
 };

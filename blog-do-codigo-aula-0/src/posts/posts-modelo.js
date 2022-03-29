@@ -28,6 +28,11 @@ class Post {
     const post = postsDao.verUm(id)
     return post
   }
+
+  static remover(id){
+    postsDao.remover(id)
+    return
+  }
 }
 
 module.exports = Post;
