@@ -24,6 +24,7 @@ module.exports = app => {
       [middlewaresAutenticacao.bearer, autorizacao('usuario', 'readAny')],
       usuariosControlador.lista
     );
+    
 
   app
     .route('/usuario/verifica_email/:token')

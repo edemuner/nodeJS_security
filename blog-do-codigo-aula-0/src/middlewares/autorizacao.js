@@ -1,15 +1,41 @@
 const controle = require('../controleDeAcesso')
 
+
+const metodos = {
+    ler:{
+      todos: 'readAny',
+      apenasSeu: 'readOwn'
+    },
+    criar: {
+      todos: 'createAny',
+      apenasSeu: 'createOwn'
+    },
+    remover: {
+      todos: 'deleteAny',
+      apenasSeu: 'deleteOwn'
+    }
+  }
+
 module.exports = (entidade, acao) =>  (req, res, next) => {
     const permissoesDoCargo = controle.can(req.user.cargo)
-    const permissao = permissoesDoCargo[acao](entidade)
-    if (permissao.granted === false){
+    const acoes = metodos[acao]
+    const permissaoTodos = permissoesDoCargo[acoes.todos](entidade)
+    const permissaoApenasSeu = permissoesDoCargo[acoes.apenasSeu](entidade)
+   
+    if (!permissaoTodos.granted && !permissaoApenasSeu.granted){
         res.status(403).end()
         return
     }
 
     req.acesso = {
-        atributos: permissao.attributes
+        todos: {
+            permitido: permissaoTodos.granted,
+            atributos: permissaoTodos.attributes
+        },
+        apenasSeu:{
+            permitido: permissaoApenasSeu.granted,
+            atributos: permissaoApenasSeu.attributes
+        },
     }
     next()
 }
