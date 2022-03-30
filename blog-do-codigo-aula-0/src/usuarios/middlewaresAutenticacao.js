@@ -19,6 +19,7 @@ module.exports = {
                     return res.status(401).json()
                 }
                 req.user = usuario
+                req.estaAutenticado = true
                 return next()
         })(req, res, next)
     },
@@ -43,6 +44,7 @@ module.exports = {
 
                 req.token = info.token
                 req.user = usuario
+                req.estaAutenticado = true
                 return next()
             }
         )(req, res, next)
