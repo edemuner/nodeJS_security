@@ -21,7 +21,7 @@ module.exports = app => {
     .route('/usuario')
     .post(usuariosControlador.adiciona)
     .get(
-      [middlewaresAutenticacao.bearer, autorizacao('usuario', 'readAny')],
+      [middlewaresAutenticacao.bearer, autorizacao('usuario', 'ler')],
       usuariosControlador.lista
     );
     

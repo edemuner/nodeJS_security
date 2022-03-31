@@ -2,8 +2,8 @@
     {
         "id": 1,
         "nome": "eduardo demuner",
-        "email": "eduardood18@hotmail.com",
-        "senhaHash": "$2b$12$C/BVTgil9ZsdT6jyzWudpu0afcPQd1N4wBFlmKxJrv1mjSBFGpNT6",
+        "email": "eduardo@hotmail.com",
+        "senhaHash": "$2b$12$yDqW38z.3Imsc.zyyvRdpuY65./TaA2GFaDBC.X1q574qO60gJBj6",
         "emailVerificado": 0,
         "cargo": "admin"
     },
@@ -11,23 +11,15 @@
         "id": 2,
         "nome": "alice demuner",
         "email": "alice@hotmail.com",
-        "senhaHash": "$2b$12$HBQ.JZCkZljvH4ULVTWMwucoqlSNd.RW3q/G6NCDEfElIyrSsCxg.",
-        "emailVerificado": 0,
-        "cargo": "assinante"
-    },
-    {
-        "id": 3,
-        "nome": "evando demuner",
-        "email": "evando@hotmail.com",
-        "senhaHash": "$2b$12$ziJCnMpOWnSZOkKnuu8Rt.YlnUM7Imp6mqqaIF74CwLohXnlE7796",
+        "senhaHash": "$2b$12$xAdSVAVLeI9eXZWaKeypDOTJSJyaBj.2razpmwTcadWIGGWo3qLMm",
         "emailVerificado": 0,
         "cargo": "editor"
     },
     {
-        "id": 4,
+        "id": 3,
         "nome": "atena demuner",
         "email": "atena@hotmail.com",
-        "senhaHash": "$2b$12$jkRcLbfLOd/bBn/lMOvr6.etC7a3vPj.s6wkRS8vle774uCXyk39q",
+        "senhaHash": "$2b$12$Hf3sbFX665qWMFvPfzmf7.1q5tGUQsrjOVoiKINRPmqCq.gTLOFQK",
         "emailVerificado": 0,
         "cargo": "assinante"
     }

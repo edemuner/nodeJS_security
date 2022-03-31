@@ -1,8 +1,8 @@
-const { middlewareAutenticacao } = require('../usuarios')
+const  middlewareAutenticacao  = require('../usuarios/middlewaresAutenticacao')
 
 module.exports = (req, res, next) => {
+    req.estaAutenticado = false
     if (req.get('Authorization')){
-        req.estaAutenticado
         return middlewareAutenticacao.bearer(req, res, next)
     }
     next()
